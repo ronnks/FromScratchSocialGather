@@ -1,9 +1,10 @@
-import { useState } from "react";
 import socialGather from "/socialLogo.png";
 import "./App.css";
-import User from "./components/User";
-import Posts from "./components/Posts";
-import ErrorBoundary from "./components/ErrorHandler/ErrorBoundary";
+import Welcome from "./components/welcome/Welcome";
+import Login from "./components/login/Login";
+import SignUp from "./components/signup/Signup";
+import Feed from "./components/feed/Feed";
+import ForgotPassword from "./components/login/forgotPassword/ForgotPassword";
 
 function App() {
   return (
@@ -19,14 +20,13 @@ function App() {
       </div>
       <h1>Social Gather</h1>
       <div className="card">
-        <ErrorBoundary fallback={<p>Something went wrong</p>}>
-          <div>
-            <User />
-          </div>
-          <div>
-            <Posts />
-          </div>
-        </ErrorBoundary>
+        <Routes>
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/feed" element={<Feed />} />
+          <Route path="/register" element={<SignUp />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/" element={<Welcome />} />
+        </Routes>
       </div>
     </>
   );

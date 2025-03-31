@@ -1,4 +1,4 @@
-import postsCollection from "./Utlities/APost";
+import postsCollection from "../post/post.modal/post.modal";
 
 function Posts() {
   return (

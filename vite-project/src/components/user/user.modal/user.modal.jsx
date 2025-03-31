@@ -1,4 +1,6 @@
-function Post(author, postDetails, photo, likes, comments, toString) {
+//  Acting like backEnd db
+
+function User(author, postDetails, photo, likes, comments, toString) {
   this.author = author;
   this.postDetails = postDetails;
   this.photo = photo;
@@ -21,7 +23,7 @@ function Post(author, postDetails, photo, likes, comments, toString) {
     this.comments;
 }
 
-const post1 = new Post(
+const post1 = new User(
   "aaa aaa",
   "Creation Using Object Literal",
   "Object Literals",
@@ -29,7 +31,7 @@ const post1 = new Post(
   ["good enough.", "deserves more attention."]
 );
 
-const post2 = new Post(
+const post2 = new User(
   "fff aaa",
   "Creation Using new Object() Constructor",
   "Constructor",
@@ -37,7 +39,7 @@ const post2 = new Post(
   ["good enough.", "deserves more attention."]
 );
 
-const post3 = new Post(
+const post3 = new User(
   "jjkjh aaa",
   "Accessing Object Properties",
   "Object Properties",
@@ -45,7 +47,7 @@ const post3 = new Post(
   ["good enough.", "deserves more attention."]
 );
 
-const post4 = new Post(
+const post4 = new User(
   "dfssfd dsfdfssf",
   "Modifying Object Properties",
   "Properties",
@@ -53,7 +55,7 @@ const post4 = new Post(
   ["good enough.", "deserves more attention."]
 );
 
-const post5 = new Post(
+const post5 = new User(
   "yyy kljjj",
   "Basic Operations on JavaScript Objects",
   "JavaScript Objects",
@@ -61,6 +63,6 @@ const post5 = new Post(
   ["good enough.", "deserves more attention."]
 );
 
-let postsCollection = [post1, post2, post3, post4, post5];
+let usersCollection = [post1, post2, post3, post4, post5];
 
-export default postsCollection;
+export default usersCollection;
