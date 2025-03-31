@@ -5,6 +5,7 @@ import Login from "./components/login/Login";
 import SignUp from "./components/signup/Signup";
 import Feed from "./components/feed/Feed";
 import ForgotPassword from "./components/login/forgotPassword/ForgotPassword";
+import Profile from "./components/profile/profile";
 
 function App() {
   return (
@@ -21,9 +22,10 @@ function App() {
       <h1>Social Gather</h1>
       <div className="card">
         <Routes>
-          <Route path="/forgotpassword" element={<ForgotPassword />} />
+          <Route path="/profile" element={<Profile />} />
           <Route path="/feed" element={<Feed />} />
           <Route path="/register" element={<SignUp />} />
+          <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Welcome />} />
         </Routes>

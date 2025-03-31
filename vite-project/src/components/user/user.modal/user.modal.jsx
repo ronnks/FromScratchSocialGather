@@ -1,68 +1,28 @@
 //  Acting like backEnd db
 
-function User(author, postDetails, photo, likes, comments, toString) {
-  this.author = author;
-  this.postDetails = postDetails;
-  this.photo = photo;
-  this.likes = likes;
-  this.comments = comments;
+function User(firstName, lastName, username, email, password) {
+  this.firstName = firstName;
+  this.lastName = lastName;
+  this.initials = firstName.charAt(0) + lastName.charAt(0);
+  this.username = username;
+  this.email = email;
+  this.password = password;
   this.toString =
     "Name: " +
-    this.author +
+    this.firstName +
+    " " +
+    this.lastName +
     "\n" +
-    "Post Details: " +
-    this.postDetails +
+    "Username: " +
+    this.username +
     "\n" +
-    "Photo Description: " +
-    this.photo +
+    "Email: " +
+    this.email +
     "\n" +
-    "Likes: " +
-    this.likes +
-    "\n" +
-    "Comments: " +
-    this.comments;
+    "Password: " +
+    this.password;
 }
 
-const post1 = new User(
-  "aaa aaa",
-  "Creation Using Object Literal",
-  "Object Literals",
-  5,
-  ["good enough.", "deserves more attention."]
-);
-
-const post2 = new User(
-  "fff aaa",
-  "Creation Using new Object() Constructor",
-  "Constructor",
-  1,
-  ["good enough.", "deserves more attention."]
-);
-
-const post3 = new User(
-  "jjkjh aaa",
-  "Accessing Object Properties",
-  "Object Properties",
-  12,
-  ["good enough.", "deserves more attention."]
-);
-
-const post4 = new User(
-  "dfssfd dsfdfssf",
-  "Modifying Object Properties",
-  "Properties",
-  46,
-  ["good enough.", "deserves more attention."]
-);
-
-const post5 = new User(
-  "yyy kljjj",
-  "Basic Operations on JavaScript Objects",
-  "JavaScript Objects",
-  17,
-  ["good enough.", "deserves more attention."]
-);
-
-let usersCollection = [post1, post2, post3, post4, post5];
+let usersCollection = [];
 
 export default usersCollection;

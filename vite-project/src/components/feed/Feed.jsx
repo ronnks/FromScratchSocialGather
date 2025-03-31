@@ -1,28 +1,16 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
-import { useNavigate } from "react-router-dom";
+import postsCollection from "../post/post.modal/post.modal";
 
 function Feed() {
-  let navigate = useNavigate();
-
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="email" placeholder="Enter email or Username" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Button
-        variant="primary"
-        type="Sign in"
-        as="a"
-        onClick={() => navigate("/login")}
-      >
-        Submit
-      </Button>
-    </Form>
+    <>
+      <h2>Feed</h2>
+      {postsCollection.map((post) => (
+        <>
+          <div>{post.toString}</div>
+          <p></p>
+        </>
+      ))}
+    </>
   );
 }
 
