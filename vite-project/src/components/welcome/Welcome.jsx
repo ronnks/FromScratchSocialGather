@@ -1,17 +1,17 @@
 import Button from "react-bootstrap/Button";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
-import socialGather from "/socialLogo.png";
-import Logo from "../logo/Logo";
 import Login from "../login/Login";
+import DoubleLogo from "../logo/doubleLogo";
 
 function Welcome() {
   let navigate = useNavigate();
 
   return (
     <>
-      <Logo></Logo>
       <Form>
+        <DoubleLogo></DoubleLogo>
+        <br></br>
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control type="email" placeholder="Enter email or Username" />
         </Form.Group>
@@ -20,7 +20,8 @@ function Welcome() {
           <Form.Control type="password" placeholder="Password" />
         </Form.Group>
         <Login></Login>
-        <Form.Text
+        <br />
+        <Button
           className="text-muted"
           variant="primary"
           type="Sign in"
@@ -28,7 +29,8 @@ function Welcome() {
           onClick={() => navigate("/forgotpassword")}
         >
           Forgot Password?
-        </Form.Text>
+        </Button>
+        <br />
         <Form.Text
           className="text-muted"
           variant="Secondary"
@@ -37,6 +39,7 @@ function Welcome() {
         >
           or
         </Form.Text>
+        <br />
         <Button
           variant="Success"
           type="Sign in"

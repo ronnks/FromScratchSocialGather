@@ -1,28 +1,24 @@
-import Button from "react-bootstrap/Button";
-import Form from "react-bootstrap/Form";
+import Card from "react-bootstrap/Card";
 import { useNavigate } from "react-router-dom";
+import MakeAPost from "../post/MakeAPost";
+import Posts from "../post/Posts";
 
-function Profile() {
+function Profile(User) {
   let navigate = useNavigate();
 
   return (
-    <Form>
-      <Form.Group className="mb-3" controlId="formBasicEmail">
-        <Form.Control type="email" placeholder="Enter email or Username" />
-      </Form.Group>
-
-      <Form.Group className="mb-3" controlId="formBasicPassword">
-        <Form.Control type="password" placeholder="Password" />
-      </Form.Group>
-      <Button
-        variant="primary"
-        type="Sign in"
-        as="a"
-        onClick={() => navigate("/login")}
-      >
-        Submit
-      </Button>
-    </Form>
+    <div>
+      <Card style={{ width: "18rem" }}>
+        <Card.Img variant="top" src="holder.js/100px180" />
+        <Card.Body>
+          <Card.Title>{User.fullname}</Card.Title>
+        </Card.Body>
+      </Card>
+      <br></br>
+      <MakeAPost></MakeAPost>
+      <br></br>
+      <Posts feed={"My Posts"}></Posts>
+    </div>
   );
 }
 

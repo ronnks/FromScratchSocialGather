@@ -1,5 +1,6 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
+import Form from "react-bootstrap/Form";
 
 function ForgotPassword() {
   return (
@@ -12,6 +13,7 @@ function ForgotPassword() {
           Please in put your email or username to locate ypur account.
         </Card.Text>
         <Form.Control type="email" placeholder="Email or Username" />
+        <br></br>
         <Button variant="normal">Cancel</Button>
         <Button variant="primary">Find</Button>
       </Card.Body>

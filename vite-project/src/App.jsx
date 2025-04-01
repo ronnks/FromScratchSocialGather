@@ -1,4 +1,3 @@
-import socialGather from "/socialLogo.png";
 import "./App.css";
 import Welcome from "./components/welcome/Welcome";
 import Login from "./components/login/Login";
@@ -6,20 +5,11 @@ import SignUp from "./components/signup/Signup";
 import Feed from "./components/feed/Feed";
 import ForgotPassword from "./components/login/forgotPassword/ForgotPassword";
 import Profile from "./components/profile/profile";
+import { Route, Routes } from "react-router-dom";
 
 function App() {
   return (
     <>
-      <div>
-        <a href="http://localhost:5173/" target="_blank">
-          <img
-            src={socialGather}
-            className="logo react"
-            alt="socialGather logo"
-          />
-        </a>
-      </div>
-      <h1>Social Gather</h1>
       <div className="card">
         <Routes>
           <Route path="/profile" element={<Profile />} />

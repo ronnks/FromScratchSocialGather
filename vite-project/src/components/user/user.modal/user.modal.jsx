@@ -3,6 +3,7 @@
 function User(firstName, lastName, username, email, password) {
   this.firstName = firstName;
   this.lastName = lastName;
+  this.fullname = firstName + " " + lastName;
   this.initials = firstName.charAt(0) + lastName.charAt(0);
   this.username = username;
   this.email = email;

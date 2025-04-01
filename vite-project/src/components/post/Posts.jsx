@@ -4,10 +4,10 @@ import Row from "react-bootstrap/Row";
 import APost from "./APost";
 import usersCollection from "../user/user.modal/user.modal";
 
-function Posts() {
+function Posts({ feed }) {
   return (
     <>
-      <h2>Feed</h2>
+      <h2>{feed}</h2>
       <Row xs={1} md={1} className="g-4">
         {postsCollection.map((post) => (
           <Col key={idx}>

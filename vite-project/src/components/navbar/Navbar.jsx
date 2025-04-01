@@ -1,9 +1,11 @@
 import Container from "react-bootstrap/Container";
 import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
-import socialGather from "/socialLogo.png";
+import { useNavigate } from "react-router-dom";
+import Logo from "../logo/Logo";
 
-function Navbar({ name }) {
+function _Navbar({ name }) {
+  const navigate = useNavigate();
   return (
     <Navbar expand="lg" className="bg-body-tertiary">
       <Container>
@@ -12,14 +14,7 @@ function Navbar({ name }) {
           variant="link"
           onClick={() => navigate("/profile")}
         >
-          <img
-            src={socialGather}
-            className="logo react"
-            alt="socialGather logo"
-            as="a"
-            variant="link"
-            onClick={() => navigate("/login")}
-          />
+          <Logo></Logo>
         </Navbar.Brand>
         <Navbar.Toggle aria-controls="basic-navbar-nav" />
         <Navbar.Collapse id="basic-navbar-nav">
@@ -40,4 +35,4 @@ function Navbar({ name }) {
   );
 }
 
-export default Navbar;
+export default _Navbar;

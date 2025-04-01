@@ -1,15 +1,14 @@
-import postsCollection from "../post/post.modal/post.modal";
+import _Navbar from "../navbar/Navbar";
+import MakeAPost from "../post/MakeAPost";
+import Posts from "../post/Posts";
 
 function Feed() {
   return (
     <>
-      <h2>Feed</h2>
-      {postsCollection.map((post) => (
-        <>
-          <div>{post.toString}</div>
-          <p></p>
-        </>
-      ))}
+      <_Navbar name={"Nick"}></_Navbar>
+      <MakeAPost></MakeAPost>
+      <br></br>
+      <Posts></Posts>
     </>
   );
 }

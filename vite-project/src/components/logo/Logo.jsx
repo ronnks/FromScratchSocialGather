@@ -1,14 +1,18 @@
+import { useNavigate } from "react-router-dom";
+import socialGather from "/socialLogo.png";
+
 function Logo() {
+  const navigate = useNavigate();
   return (
     <>
       <div>
-        <a href="http://localhost:5173/" target="_blank">
-          <img
-            src={socialGather}
-            className="logo react"
-            alt="socialGather logo"
-          />
-        </a>
+        <img
+          src={socialGather}
+          className="logo react"
+          alt="socialGather logo"
+          as="a"
+          onClick={() => navigate("/feed")}
+        />
       </div>
     </>
   );
