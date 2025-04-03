@@ -5,12 +5,7 @@ function Login() {
   let navigate = useNavigate();
 
   return (
-    <Button
-      variant="primary"
-      type="Sign in"
-      as="a"
-      onClick={() => navigate("/feed")}
-    >
+    <Button variant="primary" type="Sign in" as="a">
       Log In
     </Button>
   );
