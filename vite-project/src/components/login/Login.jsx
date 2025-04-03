@@ -1,11 +1,8 @@
 import Button from "react-bootstrap/Button";
-import { useNavigate } from "react-router-dom";
 
-function Login() {
-  let navigate = useNavigate();
-
+function Login({ onClick }) {
   return (
-    <Button variant="primary" type="Sign in" as="a">
+    <Button variant="primary" type="Sign in" as="a" onClick={onClick}>
       Log In
     </Button>
   );

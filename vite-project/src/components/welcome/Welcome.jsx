@@ -3,13 +3,14 @@ import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import Login from "../login/Login";
 import DoubleLogo from "../logo/doubleLogo";
-import { useState } from "react";
-import usersCollection from "../user/user.modal/user.modal";
+import { useState, createContext } from "react";
 
 const initialFormData = {
   emailOrUsername: "",
   password: "",
 };
+
+export const WelcomeContext = createContext();
 
 function Welcome() {
   const [formData, setFormData] = useState(initialFormData);
@@ -23,16 +24,19 @@ function Welcome() {
   };
 
   const validateSubmit = (data) => {
-    if (!data.emailOrUsername === "" && !data.password === "") {
-      usersCollection.forEach((user) => {
-        if (
-          user.username === formData.emailOrUsername &&
-          user.password === formData.password
-        ) {
-          console.log("user logged in");
-        }
-        console.log("create new account");
-      });
+    if (data.emailOrUsername && data.password) {
+      return true;
+    }
+    return false;
+  };
+  console.log(validateSubmit(formData));
+  const login = () => {
+    if (validateSubmit(formData)) {
+      navigate("/feed");
+      console.log("/feed " + formData);
+    } else {
+      navigate("/");
+      console.log("/ " + "" + formData);
     }
   };
 
@@ -42,10 +46,6 @@ function Welcome() {
     event.stopPropagation();
 
     if (form.checkValidity() === false) {
-    }
-
-    if (validateSubmit(formData)) {
-      navigate("/feed");
     }
   };
 
@@ -63,23 +63,29 @@ function Welcome() {
           />
         </Form.Group>
 
-        <Form.Group
-          name="password"
-          className="mb-3"
-          controlId="formBasicPassword"
-        >
+        <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Control
+            name="password"
             type="password"
             placeholder="Password"
             onChange={handleEvent}
           />
         </Form.Group>
-        <Login></Login>
+        <Button
+          className="text-muted"
+          variant="primary"
+          type="submit"
+          as="a"
+          onClick={login}
+        >
+          Log In
+        </Button>
+
         <br />
         <Button
           className="text-muted"
           variant="primary"
-          type="Sign in"
+          type="text"
           as="a"
           onClick={() => navigate("/forgotpassword")}
         >
@@ -90,12 +96,7 @@ function Welcome() {
           or
         </Form.Text>
         <br />
-        <Button
-          type="submit"
-          variant="Success"
-          as="a"
-          onClick={() => navigate("/register")}
-        >
+        <Button variant="Success" as="a" onClick={() => navigate("/register")}>
           Create new account
         </Button>
       </Form>
