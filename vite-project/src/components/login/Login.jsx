@@ -2,6 +2,8 @@ import { useContext, useState } from "react";
 import Button from "react-bootstrap/Button";
 import { StateContext } from "../../contexts/StateContext";
 import Form from "react-bootstrap/Form";
+import { useNavigate } from "react-router-dom";
+import ValidateLogIn from "./ValidateLogIn";
 
 const initialFormData = {
   emailOrUsername: "",
@@ -11,6 +13,7 @@ const initialFormData = {
 function Login() {
   const [formData, setFormData] = useState(initialFormData);
   const { state, setState } = useContext(StateContext);
+  const navigate = useNavigate();
 
   const handleEvent = (event) => {
     setFormData({
@@ -19,14 +22,19 @@ function Login() {
     });
   };
 
-  const handleSubmit = (event) => {
-    const form = event.currentTarget;
-    event.preventDefault();
-    event.stopPropagation();
-
-    if (form.checkValidity() === false) {
+  const loginButton = () => {
+    if (ValidateLogIn(formData)) {
+      navigate("/feed");
+    } else {
+      navigate("/");
     }
   };
+
+  const handleSubmit = (event) => {
+    event.preventDefault();
+    event.stopPropagation();
+  };
+
   return (
     <>
       <Form onSubmit={handleSubmit}>
@@ -50,7 +58,7 @@ function Login() {
             onChange={handleEvent}
           />
         </Form.Group>
-        <Button variant="primary" as="a">
+        <Button onClick={loginButton} variant="primary" as="a">
           {state}
         </Button>
 

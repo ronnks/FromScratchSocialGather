@@ -5,8 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
-import Logo from "../logo/Logo";
-import { data } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import ValidateSignUp from "./ValidateSignUp";
 import { StateContext } from "../../contexts/StateContext";
 
@@ -21,6 +20,7 @@ const initialFormData = {
 function SignUp() {
   const [formData, setFormData] = useState(initialFormData);
   const { state, setState } = useContext(StateContext);
+  const navigate = useNavigate();
 
   const handleEvent = (event) => {
     setFormData({
@@ -29,21 +29,22 @@ function SignUp() {
     });
   };
 
-  const validateSubmit = ValidateSignUp(data);
+  const signupButton = () => {
+    if (ValidateSignUp(formData)) {
+      navigate("/feed");
+    } else {
+      navigate("/");
+    }
+  };
 
   const handleSubmit = (event) => {
-    const form = event.currentTarget;
     event.preventDefault();
     event.stopPropagation();
-
-    if (form.checkValidity() === false) {
-    }
   };
 
   return (
     <>
       <Card style={{ width: "40rem" }} className="text-center">
-        <Logo></Logo>
         <h2>Create Account</h2>
         <h5>Create your account</h5>
         <Form noValidate onSubmit={handleSubmit}>
@@ -104,7 +105,9 @@ function SignUp() {
               />
             </Form.Group>
           </Row>
-          <Button variant="Success">{state}</Button>
+          <Button onClick={signupButton} variant="Success">
+            {state}
+          </Button>
         </Form>
         <Button
           type="submit"
