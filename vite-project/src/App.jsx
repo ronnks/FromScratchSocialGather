@@ -18,6 +18,7 @@ function App() {
           <Route path="/forgotpassword" element={<ForgotPassword />} />
           <Route path="/login" element={<Login />} />
           <Route path="/" element={<Welcome />} />
+          <Route path="*" element={<Welcome />} />
         </Routes>
       </div>
     </>
