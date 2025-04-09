@@ -1,13 +1,10 @@
 import express from "express";
-import { login, register, logout } from "../controllers/authController.js";
+import { login, register, logout } from "../controllers/userController.js";
 
-const authRouter = express.Router();
+const userRouter = express.Router();
 
-authRouter.post("/login", login);
-authRouter.post("/register", register);
-//authRouter.put("/resetpassword", resetpassword);
-authRouter.post("/logout", logout);
-//authRouter.get("/user", user);
-//authRouter.get("/verify", verify);
-//authRouter.get("/verifyemail/:token", verifyemailWithToken);
-//authRouter.get("/verifyemail", verifyemail);
+userRouter.post("/login", login);
+userRouter.post("/register", register);
+userRouter.post("/logout", logout);
+
+export default userRouter;

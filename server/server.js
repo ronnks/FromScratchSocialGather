@@ -13,6 +13,10 @@ connectDB();
 app.use(express.json());
 app.use(cors({ credentials: true }));
 
+app.get("/", (req, res) => {
+  res.send("Welcome to the server!");
+});
+
 //API ENDPOINTS
 app.use("/api/post", postRouter);
 app.use("/api/user", userRouter);

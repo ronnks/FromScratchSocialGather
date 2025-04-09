@@ -1,8 +1,8 @@
-import postModel from "../models/post.model";
+import Post from "../models/post.model.js";
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await postModel.find().populate("user", "username");
+    const posts = await Post.find().populate("user", "username");
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);
@@ -10,16 +10,15 @@ export const getAllPosts = async (req, res) => {
   }
 };
 
-export const createPost = async (req, res) => {
+export const createAPost = async (req, res) => {
   try {
-    const { content, like, comment, share } = req.body;
-    const newPost = new postModel({
-      user: req.user.id,
-      content,
-      like,
-      comment,
-      share,
+    const { author, content } = req.body;
+
+    const newPost = new Post({
+      content: content,
+      author: author,
     });
+
     await newPost.save();
     res.status(201).json(newPost);
   } catch (error) {
@@ -32,7 +31,7 @@ export const updatePost = async (req, res) => {
   try {
     const { id } = req.params;
     const { content, like, comment, share } = req.body;
-    const updatedPost = await postModel.findByIdAndUpdate(
+    const updatedPost = await Post.findByIdAndUpdate(
       id,
       { content, like, comment, share },
       { new: true }
@@ -50,7 +49,7 @@ export const updatePost = async (req, res) => {
 export const deletePost = async (req, res) => {
   try {
     const { id } = req.params;
-    const deletedPost = await postModel.findByIdAndDelete(id);
+    const deletedPost = await Post.findByIdAndDelete(id);
     if (!deletedPost) {
       return res.status(404).json({ message: "Post not found" });
     }
@@ -61,10 +60,10 @@ export const deletePost = async (req, res) => {
   }
 };
 
-export const likePost = async (req, res) => {
+export const likeAPost = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await postModel.findById(id);
+    const post = await Post.findById(id);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }
@@ -77,32 +76,37 @@ export const likePost = async (req, res) => {
   }
 };
 
-export const commentToPost = async (req, res) => {
-  try {
-    const { id } = req.params;
-    const { comment } = req.body;
-    const post = await postModel.findById(id);
-    const addAComment = await postModel.findByIdAndUpdate(
-      id,
-      { ...comment },
-      { new: true }
-    );
-    if (!post) {
-      return res.status(404).json({ message: "Post not found" });
-    }
-    post.comment += 1;
-    await post.save();
-    res.status(200).json(post);
-  } catch (error) {
-    console.error(error);
-    res.status(500).json({ message: "Server error :: COMMENT POST ERROR" });
-  }
+export const commentOnAPost = async (req, res) => {
+  const { content, likes, replies, shares, userId, postId } = req.body;
+
+  const addAComment = {
+    author: userId,
+    content: content,
+    likes: likes,
+    replies: replies,
+    shares: shares,
+  };
+  Post.findByIdAndUpdate(
+    postId,
+    { $push: { comments: addAComment } },
+    { new: true }
+  )
+    .then((post) => {
+      if (!post) {
+        return res.status(404).json({ message: "Post not found" });
+      }
+      res.status(200).json(post);
+    })
+    .catch((error) => {
+      console.error(error);
+      res.status(500).json({ message: "Server error :: COMMENT POST ERROR" });
+    });
 };
 
 export const shareAPost = async (req, res) => {
   try {
     const { id } = req.params;
-    const post = await postModel.findById(id);
+    const post = await Post.findById(id);
     if (!post) {
       return res.status(404).json({ message: "Post not found" });
     }

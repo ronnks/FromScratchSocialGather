@@ -1,28 +1,63 @@
-const mongoose = require("mongoose");
+import mongoose from "mongoose";
 
 const PostSchema = new mongoose.Schema({
   author: {
-    type: mongoose.Schema.Types.ObjectId,
-    ref: "User",
-    required: true,
+    type: String,
+    reqired: true,
   },
 
   content: {
     type: String,
     default: "",
   },
-  like: {
-    type: Number,
-    default: 0,
-  },
-  comment: {
-    type: [String],
-    default: "",
-  },
-  share: {
-    type: Number,
-    default: 0,
-  },
+  like: [
+    {
+      type: Number,
+      default: 0,
+    },
+  ],
+  comment: [
+    {
+      arthor: {
+        type: String,
+        reqired: true,
+      },
+    },
+    {
+      content: {
+        type: String,
+        default: "",
+      },
+    },
+    {
+      createdAt: {
+        type: Date,
+        default: Date.now,
+      },
+    },
+    {
+      like: [
+        {
+          type: Number,
+          default: 0,
+        },
+      ],
+    },
+    {
+      reply: [
+        {
+          type: Number,
+          default: 0,
+        },
+      ],
+    },
+  ],
+  share: [
+    {
+      type: Number,
+      default: 0,
+    },
+  ],
 
   createdAt: {
     type: Date,
@@ -30,6 +65,6 @@ const PostSchema = new mongoose.Schema({
   },
 });
 
-const postModel = mongoose.models.post || mongoose.model("post", PostSchema);
+const Post = mongoose.models.post || mongoose.model("post", PostSchema);
 
-export default postModel;
+export default Post;
