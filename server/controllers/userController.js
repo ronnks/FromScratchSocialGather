@@ -1,6 +1,6 @@
-import jwt from "jsonwebtoken";
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
+import validateEmail from "../../client/src/components/utlities/ValidateEmail.js";
 
 export const register = async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
@@ -29,16 +29,6 @@ export const register = async (req, res) => {
     });
 
     await newUser.save();
-
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRATION,
-    });
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-      maxAge: 14 * 24 * 60 * 60 * 1000,
-    }); // 14 days
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
@@ -47,14 +37,14 @@ export const register = async (req, res) => {
 };
 
 export const login = async (req, res, next) => {
-  const { email, password } = req.body;
+  const { input, password } = req.body;
 
   try {
-    if (!email || !password) {
+    if (!validateEmail(input) || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const user = await User.findOne({ email });
+    const user = await User.findOne({ email: input });
     if (!user) {
       return res.status(400).json({ message: "Invalid email" });
     }
@@ -64,15 +54,6 @@ export const login = async (req, res, next) => {
       return res.status(400).json({ message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
-      expiresIn: process.env.JWT_EXPIRATION,
-    });
-    res.cookie("token", token, {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-      maxAge: 14 * 24 * 60 * 60 * 1000,
-    });
     res.status(200).json({ message: "Login successful" });
   } catch (error) {
     console.error(error);
@@ -83,11 +64,6 @@ export const login = async (req, res, next) => {
 
 export const logout = async (req, res) => {
   try {
-    res.clearCookie("token", {
-      httpOnly: true,
-      secure: true,
-      sameSite: "Strict",
-    });
     res.status(200).json({ message: "Logout successful" });
   } catch (error) {
     console.error(error);

@@ -4,6 +4,7 @@ import { StateContext } from "../../contexts/StateContext";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import ValidateLogIn from "./ValidateLogIn";
+import { useSignUpStore } from "../../store/SignUpStore";
 
 const initialFormData = {
   emailOrUsername: "",
@@ -22,17 +23,12 @@ function Login() {
     });
   };
 
-  const loginButton = () => {
-    if (ValidateLogIn(formData)) {
-      navigate("/feed");
-    } else {
-      navigate("/");
-    }
-  };
+  const { login } = useSignUpStore();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    event.stopPropagation();
+
+    await login(formData);
   };
 
   return (
@@ -44,6 +40,7 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicEmail">
           <Form.Control
             name="emailOrUsername"
+            value={formData.emailOrUsername}
             type="email"
             placeholder="Enter email or Username"
             onChange={handleEvent}
@@ -53,12 +50,13 @@ function Login() {
         <Form.Group className="mb-3" controlId="formBasicPassword">
           <Form.Control
             name="password"
+            value={formData.password}
             type="password"
             placeholder="Password"
             onChange={handleEvent}
           />
         </Form.Group>
-        <Button onClick={loginButton} variant="primary" as="a">
+        <Button type="submit" variant="primary" as="a">
           {state}
         </Button>
 

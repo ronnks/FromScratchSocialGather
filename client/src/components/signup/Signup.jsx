@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import { useNavigate } from "react-router-dom";
-import ValidateSignUp from "./ValidateSignUp";
 import { StateContext } from "../../contexts/StateContext";
+import { useSignUpStore } from "../../store/SignUpStore";
 
 const initialFormData = {
   firstName: "",
@@ -29,17 +29,19 @@ function SignUp() {
     });
   };
 
-  const signupButton = () => {
-    if (ValidateSignUp(formData)) {
-      navigate("/feed");
-    } else {
-      navigate("/");
-    }
-  };
+  const { signup } = useSignUpStore();
 
-  const handleSubmit = (event) => {
+  const handleSubmit = async (event) => {
     event.preventDefault();
-    event.stopPropagation();
+
+    const { success, message } = await signup(formData);
+
+    if (success) {
+      console.log("User registered successfully");
+      navigate("/login");
+    } else {
+      console.log("Registration failed:", message);
+    }
   };
 
   return (
@@ -52,6 +54,7 @@ function SignUp() {
             <Form.Group as={Col} md="4" controlId="validationCustom01">
               <Form.Control
                 name="firstName"
+                value={formData.firstName}
                 required
                 type="text"
                 placeholder="First name"
@@ -60,7 +63,8 @@ function SignUp() {
             </Form.Group>
             <Form.Group as={Col} md="4" controlId="validationCustom02">
               <Form.Control
-                name="LastName"
+                name="lastName"
+                value={formData.lastName}
                 required
                 type="text"
                 placeholder="Last name"
@@ -74,6 +78,7 @@ function SignUp() {
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 <Form.Control
                   name="username"
+                  value={formData.username}
                   type="username"
                   placeholder="Username"
                   aria-describedby="inputGroupPrepend"
@@ -87,6 +92,7 @@ function SignUp() {
             <Form.Group as={Col} md="6" controlId="validationCustom03">
               <Form.Control
                 name="email"
+                value={formData.email}
                 type="email"
                 placeholder="Email"
                 required
@@ -98,6 +104,7 @@ function SignUp() {
             <Form.Group as={Col} md="6" controlId="validationCustom04">
               <Form.Control
                 name="password"
+                value={formData.password}
                 type="password"
                 placeholder="New password"
                 required
@@ -105,16 +112,11 @@ function SignUp() {
               />
             </Form.Group>
           </Row>
-          <Button onClick={signupButton} variant="Success">
+          <Button type="submit" variant="Success">
             {state}
           </Button>
         </Form>
-        <Button
-          type="submit"
-          variant="Primary"
-          as="a"
-          onClick={() => setState("Login")}
-        >
+        <Button variant="Primary" as="a" onClick={() => setState("Login")}>
           Already have an account?
         </Button>
       </Card>
