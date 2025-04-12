@@ -2,7 +2,7 @@ import Post from "../models/post.model.js";
 
 export const getAllPosts = async (req, res) => {
   try {
-    const posts = await Post.find().populate("user", "username");
+    const posts = await Post.find({});
     res.status(200).json(posts);
   } catch (error) {
     console.error(error);

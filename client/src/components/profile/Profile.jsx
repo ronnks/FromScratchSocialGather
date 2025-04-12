@@ -1,11 +1,19 @@
 import Card from "react-bootstrap/Card";
-import { useNavigate } from "react-router-dom";
 import MakeAPost from "../post/MakeAPost";
 import Posts from "../post/Posts";
 import _Navbar from "../navbar/Navbar";
+import { useEffect } from "react";
+import { usePostStore } from "../../store/PostStore";
+import APost from "../post/APost";
+import Row from "react-bootstrap/esm/Row";
+import Col from "react-bootstrap/esm/Col";
 
 function Profile(User) {
-  let navigate = useNavigate();
+  const { getPosts, posts } = usePostStore();
+
+  useEffect(() => {
+    getPosts();
+  }, [getPosts]);
 
   return (
     <div>
@@ -19,7 +27,12 @@ function Profile(User) {
       <br></br>
       <MakeAPost></MakeAPost>
       <br></br>
-      <Posts feed={"My Posts"}></Posts>
+      <h2>{"feed"}</h2>
+      <Row xs={1} md={1} className="g-4">
+        {posts.map((post) => (
+          <Col key={post._id}>{post.content}</Col>
+        ))}
+      </Row>
     </div>
   );
 }

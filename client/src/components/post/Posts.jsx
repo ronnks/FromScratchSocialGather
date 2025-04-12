@@ -1,20 +1,18 @@
-import postsCollection from "../post/post.modal/post.modal";
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import APost from "./APost";
-import usersCollection from "../user/user.modal/user.modal";
 
-function Posts({ feed }) {
+function Posts(list) {
   return (
     <>
-      <h2>{feed}</h2>
+      {/* <h2>{"feed"}</h2>
       <Row xs={1} md={1} className="g-4">
-        {postsCollection.map((post) => (
+        {list.map((post) => (
           <Col key={idx}>
-            <APost User={usersCollection[0]} Posts={post}></APost>
+            <APost Posts={post}></APost>
           </Col>
         ))}
-      </Row>
+      </Row> */}
     </>
   );
 }
