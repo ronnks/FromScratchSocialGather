@@ -1,6 +1,5 @@
 import bcrypt from "bcryptjs";
 import User from "../models/user.model.js";
-import validateEmail from "../../client/src/components/utlities/ValidateEmail.js";
 
 export const register = async (req, res) => {
   const { firstName, lastName, username, email, password } = req.body;
@@ -29,37 +28,40 @@ export const register = async (req, res) => {
     });
 
     await newUser.save();
+    console.log("User registered successfully:", newUser);
     res.status(201).json({ message: "User registered successfully" });
   } catch (error) {
     console.error(error);
     res.status(500).json({ message: "Server error :: REGISTRATION ERROR" });
+    console.log("Registration error:", error);
   }
 };
 
-export const login = async (req, res, next) => {
-  const { input, password } = req.body;
+export const login = async (req, res) => {
+  const { email, password } = req.body;
 
   try {
-    if (!validateEmail(input) || !password) {
+    if (!email || !password) {
       return res.status(400).json({ message: "All fields are required" });
     }
 
-    const user = await User.findOne({ email: input });
-    if (!user) {
+    const userEmail = await User.findOne({ email });
+    if (!userEmail) {
       return res.status(400).json({ message: "Invalid email" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, user.password);
+    const isPasswordValid = await bcrypt.compare(password, userEmail.password);
     if (!isPasswordValid) {
       return res.status(400).json({ message: "Invalid password" });
     }
 
     res.status(200).json({ message: "Login successful" });
+    console.log("User logged in successfully:", userEmail);
   } catch (error) {
     console.error(error);
+    console.log("Login error:", error);
     return res.status(500).json({ message: "Server error :: LOGIN ERROR" });
   }
-  next();
 };
 
 export const logout = async (req, res) => {

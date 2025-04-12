@@ -5,7 +5,7 @@ import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import { StateContext } from "../../contexts/StateContext";
 import { useSignUpStore } from "../../store/SignUpStore";
 
@@ -38,17 +38,16 @@ function SignUp() {
 
     if (success) {
       console.log("User registered successfully");
-      navigate("/login");
-    } else {
-      console.log("Registration failed:", message);
+      navigate("/feed");
     }
+    console.log("Registration failed:", message);
   };
 
   return (
     <>
       <Card style={{ width: "40rem" }} className="text-center">
         <h2>Create Account</h2>
-        <h5>Create your account</h5>
+        <h6>Create your account</h6>
         <Form noValidate onSubmit={handleSubmit}>
           <Row className="mb-6">
             <Form.Group as={Col} md="4" controlId="validationCustom01">
@@ -112,13 +111,13 @@ function SignUp() {
               />
             </Form.Group>
           </Row>
-          <Button type="submit" variant="Success">
+          <Button type="submit" variant="success">
             {state}
           </Button>
         </Form>
-        <Button variant="Primary" as="a" onClick={() => setState("Login")}>
+        <Link variant="Primary" as="a" onClick={() => setState("Login")}>
           Already have an account?
-        </Button>
+        </Link>
       </Card>
     </>
   );

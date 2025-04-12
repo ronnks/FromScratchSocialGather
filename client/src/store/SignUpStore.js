@@ -1,6 +1,5 @@
 import { create } from "zustand";
-
-const backendUrl = import.meta.env.VITE_BACKEND_URL;
+import { CONSTANTS } from "../constants/Constants";
 
 export const useSignUpStore = create((set) => ({
   signup: async (user) => {
@@ -14,7 +13,7 @@ export const useSignUpStore = create((set) => ({
       return { sucess: false, message: "All fields are required" };
     }
 
-    const response = await fetch(backendUrl + "/api/user/register", {
+    const response = await fetch(CONSTANTS.BACKEND_URL + "/api/user/register", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
