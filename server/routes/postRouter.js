@@ -8,15 +8,16 @@ import {
   shareAPost,
   updatePost,
 } from "../controllers/postController.js";
+import userAuth from "../middleware/UserAuth.js";
 
 const postRouter = express.Router();
 
-postRouter.get("/my-feed", getAllPosts);
-postRouter.post("/make-a-post", createAPost);
-postRouter.put("/edit-post", updatePost);
-postRouter.delete("/delete-post", deletePost);
-postRouter.post("/like-a-post", likeAPost);
-postRouter.post("/comment-on-a-post", commentOnAPost);
-postRouter.post("/share-a-post", shareAPost);
+postRouter.get("/my-feed", userAuth, getAllPosts);
+postRouter.post("/make-a-post", userAuth, createAPost);
+postRouter.put("/edit-post", userAuth, updatePost);
+postRouter.delete("/delete-post", userAuth, deletePost);
+postRouter.post("/like-a-post", userAuth, likeAPost);
+postRouter.post("/comment-on-a-post", userAuth, commentOnAPost);
+postRouter.post("/share-a-post", userAuth, shareAPost);
 
 export default postRouter;

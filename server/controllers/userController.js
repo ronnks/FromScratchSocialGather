@@ -68,21 +68,21 @@ export const login = async (req, res) => {
         .json({ sucess: false, message: "All fields are required" });
     }
 
-    const userEmail = await User.findOne({
+    const user = await User.findOne({
       $or: [{ email: input }, { username: input }],
     });
-    if (!userEmail) {
+    if (!user) {
       return res.status(400).json({ sucess: false, message: "Invalid email" });
     }
 
-    const isPasswordValid = await bcrypt.compare(password, userEmail.password);
+    const isPasswordValid = await bcrypt.compare(password, user.password);
     if (!isPasswordValid) {
       return res
         .status(400)
         .json({ sucess: false, message: "Invalid password" });
     }
 
-    const token = jwt.sign({ id: newUser._id }, process.env.JWT_SECRET, {
+    const token = jwt.sign({ id: user._id }, process.env.JWT_SECRET, {
       expiresIn: "7d",
     });
 
