@@ -1,29 +1,28 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 
+const initialState = {
+  like: [],
+  comment: [],
+  share: [],
+};
+
 function APost(User, Post) {
+  const [post, setPost] = useState(initialState);
+
   const handleChange = (e) => {
     const { name, value } = e.target;
-    setNewPost((prev) => ({ ...prev, [name]: value }));
-  };
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
+    setPost((prev) => ({ ...prev, [name]: value }));
   };
 
   function hidePost() {}
-
-  function likeAPost() {}
-
-  function CommentOnAPost() {}
 
   return (
     <Card className="text-center">
       <Card.Header className="bg-body-tertiary justify-content-between">
         <Button
           variant="primary"
-          type="Sign in"
-          as="a"
+          type="text"
           onClick={() => navigate("/profile")}
         >
           {User.firstName}
@@ -38,21 +37,32 @@ function APost(User, Post) {
       </Card.Body>
       <Card.Footer className="text-muted bg-body-tertiary justify-content-between">
         <Button
+          name="like"
+          value={post.like}
           variant="primary"
-          type="Sign in"
-          as="a"
-          onClick={() => likeAPost}
+          type="text"
+          onChange={handleChange}
         >
           Like
         </Button>
         <Card.Text>2 days ago</Card.Text>
         <Button
+          name="comment"
+          value={post.comment}
           variant="primary"
-          type="Sign in"
-          as="a"
-          onClick={CommentOnAPost}
+          type="text"
+          onChange={handleChange}
         >
           Comment
+        </Button>
+        <Button
+          name="share"
+          value={post.share}
+          variant="primary"
+          type="text"
+          onChange={handleChange}
+        >
+          Share
         </Button>
       </Card.Footer>
     </Card>

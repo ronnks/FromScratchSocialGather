@@ -4,8 +4,13 @@ import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { usePostStore } from "../../store/PostStore";
 
+const initialState = {
+  author: "",
+  content: "",
+};
+
 function MakeAPost() {
-  const [newPost, setNewPost] = useState({ author: "", content: "" });
+  const [newPost, setNewPost] = useState(initialState);
 
   const handleChange = (e) => {
     const { name, value } = e.target;
@@ -31,8 +36,10 @@ function MakeAPost() {
       <Card.Body>
         <FloatingLabel controlId="floatingTextarea2" label="">
           <Form.Control
-            as="textarea"
-            placeholder="Leave a comment here"
+            name="content"
+            placeholder="Make a post"
+            type="text"
+            value={newPost.content}
             onChange={handleChange}
             style={{ height: "100px" }}
           />

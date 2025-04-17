@@ -1,16 +1,15 @@
 import DoubleLogo from "../logo/doubleLogo";
 import Login from "../login/Login";
 import SignUp from "../signup/Signup";
-import { useContext } from "react";
-import { StateContext } from "../../contexts/StateContext";
+import { loginOrSignup } from "../../store/StateContext";
 
 function Welcome() {
-  const { state } = useContext(StateContext);
+  const { loginOrSignupState } = loginOrSignup();
 
   return (
     <>
       <DoubleLogo></DoubleLogo>
-      {state === "Login" ? <Login /> : <SignUp />}
+      {loginOrSignupState === "Login" ? <Login /> : <SignUp />}
     </>
   );
 }

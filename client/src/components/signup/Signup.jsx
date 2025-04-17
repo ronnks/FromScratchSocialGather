@@ -6,8 +6,8 @@ import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link, useNavigate } from "react-router-dom";
-import { StateContext } from "../../contexts/StateContext";
 import { useSignUpStore } from "../../store/SignUpStore";
+import { loginOrSignup } from "../../store/LoginOrSignupState";
 
 const initialFormData = {
   firstName: "",
@@ -19,7 +19,6 @@ const initialFormData = {
 
 function SignUp() {
   const [formData, setFormData] = useState(initialFormData);
-  const { state, setState } = useContext(StateContext);
   const navigate = useNavigate();
 
   const handleEvent = (event) => {
@@ -112,10 +111,14 @@ function SignUp() {
             </Form.Group>
           </Row>
           <Button type="submit" variant="success">
-            {state}
+            {loginOrSignup.loginOrSignupState}
           </Button>
         </Form>
-        <Link variant="Primary" as="a" onClick={() => setState("Login")}>
+        <Link
+          variant="Primary"
+          as="a"
+          onClick={loginOrSignup.setLoginOrSignupState("Login")}
+        >
           Already have an account?
         </Link>
       </Card>
