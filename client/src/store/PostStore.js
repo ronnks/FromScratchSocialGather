@@ -46,7 +46,7 @@ export const usePostStore = create((set) => ({
         return { success: false, message: "Failed to retrieve posts" };
       }
       const data = await response.json();
-      set((state) => ({ myPosts: [...state, data] }));
+      set((state) => ({ myPosts: [...state, data.myPosts] }));
       return { success: true, message: "Posts successfully retrieved" };
     } catch (error) {
       return { error: error.message };

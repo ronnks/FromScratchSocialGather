@@ -2,8 +2,7 @@ import express from "express";
 import cors from "cors";
 import "dotenv/config";
 import connectDB from "./config/mongodb.js";
-import postRouter from "./routes/postRouter.js";
-import userRouter from "./routes/userRouter.js";
+import { routes } from "./routes/Routers.js";
 
 const app = express();
 const port = process.env.PORT || 4000;
@@ -20,8 +19,9 @@ app.get("/", (req, res) => {
   res.send("Welcome to the server!");
 });
 
-app.use("/api/post", postRouter);
-app.use("/api/user", userRouter);
+app.use("/api/post", routes[0]);
+app.use("/api/user", routes[1]);
+app.use("/api/auth", routes[2]);
 
 app.use((req, res) => {
   res.status(404).json({ message: "Route not found" });

@@ -1,16 +1,9 @@
 import express from "express";
-import {
-  login,
-  register,
-  logout,
-  getUser,
-} from "../controllers/userController.js";
+import { getUser } from "../controllers/userController";
+import userAuth from "../middleware/UserAuth";
 
 const userRouter = express.Router();
 
-userRouter.post("/login", login);
-userRouter.post("/register", register);
-userRouter.post("/logout", logout);
-userRouter.get("/get-user-data", getUser);
+userRouter.get("/get-user-data", userAuth, getUser);
 
 export default userRouter;

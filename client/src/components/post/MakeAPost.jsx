@@ -3,6 +3,7 @@ import Card from "react-bootstrap/Card";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { usePostStore } from "../../store/PostStore";
+import { set } from "mongoose";
 
 const initialState = {
   author: "",
@@ -17,7 +18,12 @@ function MakeAPost() {
     setNewPost((prev) => ({ ...prev, [name]: value }));
   };
 
+  const { user } = useUserStore();
+  const fullName = `${user.firstName} ${user.lastName}`;
+  setNewPost((prev) => ({ ...prev, author: fullName }));
+
   const { createAPost } = usePostStore();
+
   const MakeAPost = async () => {
     const { success, message } = await createAPost(newPost);
 
