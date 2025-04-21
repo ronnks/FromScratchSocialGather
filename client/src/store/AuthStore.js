@@ -1,7 +1,7 @@
 import { create } from "zustand";
 import { CONSTANTS } from "../constants/Constants";
 
-export const useSignUpStore = create((set) => ({
+export const useAuthStore = create((set) => ({
   signup: async (user) => {
     if (
       !user.firstName ||

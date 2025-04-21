@@ -3,6 +3,7 @@ import Nav from "react-bootstrap/Nav";
 import Navbar from "react-bootstrap/Navbar";
 import NavDropdown from "react-bootstrap/NavDropdown";
 import { useNavigate } from "react-router-dom";
+import SignOut from "../SignOut";
 
 function _Navbar() {
   const navigate = useNavigate();
@@ -29,11 +30,7 @@ function _Navbar() {
               >
                 Profile
               </NavDropdown.Item>
-              <NavDropdown.Item
-                as="a"
-                variant="link"
-                onClick={() => navigate("/")}
-              >
+              <NavDropdown.Item as="a" variant="link" onClick={SignOut()}>
                 Sign out
               </NavDropdown.Item>
             </NavDropdown>
