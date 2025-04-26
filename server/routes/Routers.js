@@ -1,5 +1,5 @@
-import postRouter from "./routes/postRouter.js";
-import userRouter from "./routes/userRouter.js";
-import authRouter from "./routes/authRouter.js";
+import userRouter from "./userRouter.js";
+import authRouter from "./authRouter.js";
+import postRouter from "./postRouter.js";
 
 export const routes = [postRouter, userRouter, authRouter];

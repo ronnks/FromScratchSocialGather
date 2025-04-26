@@ -3,7 +3,8 @@ import Card from "react-bootstrap/Card";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
 import { usePostStore } from "../../store/PostStore";
-import { set } from "mongoose";
+import { useState } from "react";
+import { useUserStore } from "../../store/UserStore";
 
 const initialState = {
   author: "",
@@ -24,7 +25,7 @@ function MakeAPost() {
 
   const { createAPost } = usePostStore();
 
-  const MakeAPost = async () => {
+  const post = async () => {
     const { success, message } = await createAPost(newPost);
 
     if (success) {
@@ -51,7 +52,7 @@ function MakeAPost() {
           />
         </FloatingLabel>
 
-        <Button onClick={MakeAPost} variant="primary">
+        <Button onClick={() => ""} variant="primary">
           Post
         </Button>
       </Card.Body>

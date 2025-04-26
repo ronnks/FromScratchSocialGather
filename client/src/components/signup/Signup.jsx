@@ -1,13 +1,13 @@
 import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useContext, useState } from "react";
+import { useState } from "react";
 import Form from "react-bootstrap/Form";
 import Row from "react-bootstrap/Row";
 import Col from "react-bootstrap/Col";
 import InputGroup from "react-bootstrap/InputGroup";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignUpStore } from "../../store/SignUpStore";
 import { loginOrSignup } from "../../store/LoginOrSignupState";
+import { useAuthStore } from "../../store/AuthStore";
 
 const initialFormData = {
   firstName: "",
@@ -19,6 +19,7 @@ const initialFormData = {
 
 function SignUp() {
   const [formData, setFormData] = useState(initialFormData);
+  const { loginOrSignupState, setLoginOrSignupState } = loginOrSignup();
   const navigate = useNavigate();
 
   const handleEvent = (event) => {
@@ -28,7 +29,7 @@ function SignUp() {
     });
   };
 
-  const { signup } = useSignUpStore();
+  const { signup } = useAuthStore();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -111,13 +112,13 @@ function SignUp() {
             </Form.Group>
           </Row>
           <Button type="submit" variant="success">
-            {loginOrSignup.loginOrSignupState}
+            {loginOrSignupState}
           </Button>
         </Form>
         <Link
           variant="Primary"
           as="a"
-          onClick={loginOrSignup.setLoginOrSignupState("Login")}
+          onClick={() => setLoginOrSignupState("Login")}
         >
           Already have an account?
         </Link>

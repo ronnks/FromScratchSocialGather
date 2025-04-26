@@ -1,10 +1,9 @@
-import { useContext, useState } from "react";
+import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
-import { StateContext } from "../../store/StateContext";
 import { Link, useNavigate } from "react-router-dom";
-import { useSignUpStore } from "../../store/SignUpStore";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { loginOrSignup } from "../../store/LoginOrSignupState";
+import { useAuthStore } from "../../store/AuthStore";
 
 const initialFormData = {
   email: "",
@@ -13,7 +12,7 @@ const initialFormData = {
 
 function Login() {
   const [formData, setFormData] = useState(initialFormData);
-  const { state, setState } = useContext(StateContext);
+  const { loginOrSignupState, setLoginOrSignupState } = loginOrSignup();
   const navigate = useNavigate();
 
   const handleEvent = (event) => {
@@ -23,7 +22,7 @@ function Login() {
     });
   };
 
-  const { login } = useSignUpStore();
+  const { login } = useAuthStore();
 
   const handleSubmit = async (event) => {
     event.preventDefault();
@@ -64,7 +63,7 @@ function Login() {
           />
         </Form.Group>
         <Button type="submit" variant="success">
-          {loginOrSignup.loginOrSignupState}
+          {loginOrSignupState}
         </Button>
         <br />
         <Link
@@ -83,7 +82,7 @@ function Login() {
           type="text"
           variant="Success"
           as="a"
-          onClick={loginOrSignup.setLoginOrSignupState("SignUp")}
+          onClick={setLoginOrSignupState("SignUp")}
         >
           Create new account
         </Link>

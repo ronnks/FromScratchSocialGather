@@ -1,10 +1,10 @@
 import DoubleLogo from "../logo/doubleLogo";
 import Login from "../login/Login";
 import SignUp from "../signup/Signup";
-import { loginOrSignup } from "../../store/StateContext";
+import { loginOrSignup } from "../../store/LoginOrSignupState";
 
 function Welcome() {
-  const { loginOrSignupState } = loginOrSignup();
+  const loginOrSignupState = loginOrSignup();
 
   return (
     <>
