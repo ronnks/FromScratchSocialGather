@@ -22,7 +22,9 @@ function Login() {
     });
   };
 
-  const { login } = useAuthStore();
+  const login = useAuthStore((state) => ({
+    login: state.login,
+  }));
 
   const handleSubmit = async (event) => {
     event.preventDefault();

@@ -19,7 +19,10 @@ const initialFormData = {
 
 function SignUp() {
   const [formData, setFormData] = useState(initialFormData);
-  const { loginOrSignupState, setLoginOrSignupState } = loginOrSignup();
+  const loginOrSignupState = loginOrSignup((state) => state.loginOrSignupState);
+  const setLoginOrSignupState = loginOrSignup(
+    (state) => state.setLoginOrSignupState
+  );
   const navigate = useNavigate();
 
   const handleEvent = (event) => {
@@ -29,7 +32,9 @@ function SignUp() {
     });
   };
 
-  const { signup } = useAuthStore();
+  const signup = useAuthStore((state) => ({
+    signup: state.signup,
+  }));
 
   const handleSubmit = async (event) => {
     event.preventDefault();
