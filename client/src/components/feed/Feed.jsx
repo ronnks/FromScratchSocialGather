@@ -3,14 +3,7 @@ import MakeAPost from "../post/MakeAPost";
 import Posts from "../post/Posts";
 
 function Feed() {
-  return (
-    <>
-      <_Navbar name={"Nick"}></_Navbar>
-      <MakeAPost></MakeAPost>
-      <br></br>
-      <Posts></Posts>
-    </>
-  );
+  return <>Feed</>;
 }
 
 export default Feed;

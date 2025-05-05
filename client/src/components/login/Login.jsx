@@ -12,7 +12,10 @@ const initialFormData = {
 
 function Login() {
   const [formData, setFormData] = useState(initialFormData);
-  const { loginOrSignupState, setLoginOrSignupState } = loginOrSignup();
+  const loginOrSignupState = loginOrSignup((state) => state.loginOrSignupState);
+  const setLoginOrSignupState = loginOrSignup(
+    (state) => state.setLoginOrSignupState
+  );
   const navigate = useNavigate();
 
   const handleEvent = (event) => {
@@ -84,7 +87,7 @@ function Login() {
           type="text"
           variant="Success"
           as="a"
-          onClick={setLoginOrSignupState("SignUp")}
+          onClick={() => setLoginOrSignupState("SignUp")}
         >
           Create new account
         </Link>
