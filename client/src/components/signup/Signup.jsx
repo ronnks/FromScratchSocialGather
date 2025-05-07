@@ -1,13 +1,15 @@
-import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
-import { useState } from "react";
-import Form from "react-bootstrap/Form";
-import Row from "react-bootstrap/Row";
-import Col from "react-bootstrap/Col";
-import InputGroup from "react-bootstrap/InputGroup";
+
 import { Link, useNavigate } from "react-router-dom";
 import { loginOrSignup } from "../../store/LoginOrSignupState";
 import { useAuthStore } from "../../store/AuthStore";
+import { useState } from "react";
+import Button from "react-bootstrap/Button";
+import Col from "react-bootstrap/Col";
+import Form from "react-bootstrap/Form";
+import InputGroup from "react-bootstrap/InputGroup";
+import Row from "react-bootstrap/Row";
+import "./signupCSS.css";
 
 const initialFormData = {
   firstName: "",
@@ -18,6 +20,7 @@ const initialFormData = {
 };
 
 function SignUp() {
+  const [validated, setValidated] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const loginOrSignupState = loginOrSignup((state) => state.loginOrSignupState);
   const setLoginOrSignupState = loginOrSignup(
@@ -32,102 +35,87 @@ function SignUp() {
     });
   };
 
-  const signup = useAuthStore((state) => ({
+  /*  const signup = useAuthStore((state) => ({
     signup: state.signup,
-  }));
+  })); */
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-    const { success, message } = await signup(formData);
+    setValidated(true);
+
+    /* const { success, message } = await signup(formData);
 
     if (success) {
       console.log("User registered successfully");
       navigate("/feed");
     }
-    console.log("Registration failed:", message);
+    console.log("Registration failed:", message); */
   };
 
   return (
     <>
-      <Card style={{ width: "40rem" }} className="text-center">
-        <h2>Create Account</h2>
-        <h6>Create your account</h6>
-        <Form noValidate onSubmit={handleSubmit}>
-          <Row className="mb-6">
-            <Form.Group as={Col} md="4" controlId="validationCustom01">
-              <Form.Control
-                name="firstName"
-                value={formData.firstName}
-                required
-                type="text"
-                placeholder="First name"
-                onChange={handleEvent}
-              />
+      <div className="signUpPage">
+        <h1>socialgather</h1>
+        <Card className="text-center signUpBox">
+          <h2>Create Account</h2>
+          <h6>It's super quick, let's go.</h6>
+          <Form noValidate validated={validated} onSubmit={handleSubmit}>
+            <Form.Group md="3" controlId="validationCustom01">
+              <Form.Control required type="text" placeholder="First name" />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                What's your name.
+              </Form.Control.Feedback>
             </Form.Group>
-            <Form.Group as={Col} md="4" controlId="validationCustom02">
-              <Form.Control
-                name="lastName"
-                value={formData.lastName}
-                required
-                type="text"
-                placeholder="Last name"
-                onChange={handleEvent}
-              />
+            <br />
+            <Form.Group md="3" controlId="validationCustom02">
+              <Form.Control required type="text" placeholder="Last name" />
+              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+              <Form.Control.Feedback type="invalid">
+                What's your name.
+              </Form.Control.Feedback>
             </Form.Group>
-          </Row>
-          <Row>
-            <Form.Group as={Col} md="4" controlId="validationCustomUsername">
+            <br />
+            <Form.Group md="3" controlId="validationCustomUsername">
               <InputGroup hasValidation>
                 <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
                 <Form.Control
-                  name="username"
-                  value={formData.username}
-                  type="username"
-                  placeholder="Username"
+                  type="text"
+                  placeholder="Username or email"
                   aria-describedby="inputGroupPrepend"
                   required
-                  onChange={handleEvent}
                 />
+                <Form.Control.Feedback type="invalid">
+                  Please choose a username.
+                </Form.Control.Feedback>
               </InputGroup>
             </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationCustom03">
-              <Form.Control
-                name="email"
-                value={formData.email}
-                type="email"
-                placeholder="Email"
-                required
-                onChange={handleEvent}
-              />
+            <br />
+            <Form.Group md="3" controlId="validationCustom03">
+              <Form.Control type="text" placeholder="New password" required />
+              <Form.Control.Feedback type="invalid">
+                Please provide a valid city.
+              </Form.Control.Feedback>
             </Form.Group>
-          </Row>
-          <Row className="mb-3">
-            <Form.Group as={Col} md="6" controlId="validationCustom04">
-              <Form.Control
-                name="password"
-                value={formData.password}
-                type="password"
-                placeholder="New password"
-                required
-                onChange={handleEvent}
-              />
-            </Form.Group>
-          </Row>
-          <Button type="submit" variant="success">
-            {loginOrSignupState}
-          </Button>
-        </Form>
-        <Link
-          variant="Primary"
-          as="a"
-          onClick={() => setLoginOrSignupState("Login")}
-        >
-          Already have an account?
-        </Link>
-      </Card>
+
+            <Button type="submit" variant="success">
+              {loginOrSignupState}
+            </Button>
+          </Form>
+          <Link
+            variant="Primary"
+            as="a"
+            onClick={() => setLoginOrSignupState("Login")}
+          >
+            Already have an account?
+          </Link>
+        </Card>
+      </div>
     </>
   );
 }

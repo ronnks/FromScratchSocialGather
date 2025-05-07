@@ -1,0 +1,20 @@
+.loginBox {
+  width: 350px;
+  margin-top: 100px;
+  padding: 25px;
+
+  align-self: center;
+  text-align: center;
+}
+
+.socialgatherBox {
+  align-self: center;
+}
+
+.formBox {
+}
+
+h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(24, 71, 226);
+}

@@ -1,0 +1,22 @@
+.signUpPage {
+  align-self: center;
+  text-align: center;
+}
+
+.signUpBox {
+  width: 400px;
+  margin-top: 150px;
+  padding: 25px;
+}
+
+.socialgatherBox {
+  align-self: center;
+}
+
+.formBox {
+}
+
+h1 {
+  font-family: "Franklin Gothic Medium", "Arial Narrow", Arial, sans-serif;
+  color: rgb(24, 71, 226);
+}

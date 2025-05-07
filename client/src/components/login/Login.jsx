@@ -1,16 +1,20 @@
 import { useState } from "react";
 import { Button, Form } from "react-bootstrap";
 import { Link, useNavigate } from "react-router-dom";
+import "./loginCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { loginOrSignup } from "../../store/LoginOrSignupState";
 import { useAuthStore } from "../../store/AuthStore";
+import SocialGather from "../logo/socialGather";
+import Card from "react-bootstrap/Card";
 
 const initialFormData = {
-  email: "",
+  input: "",
   password: "",
 };
 
 function Login() {
+  const [validated, setValidated] = useState(false);
   const [formData, setFormData] = useState(initialFormData);
   const loginOrSignupState = loginOrSignup((state) => state.loginOrSignupState);
   const setLoginOrSignupState = loginOrSignup(
@@ -25,73 +29,92 @@ function Login() {
     });
   };
 
-  const login = useAuthStore((state) => ({
+  /*  const login = useAuthStore((state) => ({
     login: state.login,
-  }));
+  })); */
 
   const handleSubmit = async (event) => {
-    event.preventDefault();
+    const form = event.currentTarget;
+    if (form.checkValidity() === false) {
+      event.preventDefault();
+      event.stopPropagation();
+    }
 
-    const { success, message } = await login(formData);
+    setValidated(true);
+
+    /* const { success, message } = await login(formData);
 
     if (success == true) {
       console.log("Login successed:", message);
       navigate("/feed");
     }
-    console.log("Login failed:", message);
+    console.log("Login failed:", message); */
   };
 
   return (
     <>
-      <Form onSubmit={handleSubmit}>
-        <Form.Text>Login</Form.Text>
-        <br />
-        <Form.Text>Login to your acount!</Form.Text>
-        <br />
-        <br />
-        <Form.Group className="mb-3" controlId="formBasicEmail">
-          <Form.Control
-            name="email"
-            value={formData.email}
+      <Card className="loginBox">
+        <div className="socialgatherBox">
+          <h1>socialgather</h1>
+        </div>
+        <Form noValidate validated={validated} onSubmit={handleSubmit}>
+          <br />
+          <Form.Group className="mb-3" controlId="formBasicEmail">
+            <Form.Control
+              required
+              name="email"
+              value={formData.input}
+              type="text"
+              placeholder="Enter email or Username"
+              onChange={handleEvent}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please enter your name.
+            </Form.Control.Feedback>
+          </Form.Group>
+
+          <Form.Group className="mb-3" controlId="formBasicPassword">
+            <Form.Control
+              required
+              name="password"
+              value={formData.password}
+              type="password"
+              placeholder="Password"
+              onChange={handleEvent}
+            />
+            <Form.Control.Feedback type="invalid">
+              Please enter your password.
+            </Form.Control.Feedback>
+          </Form.Group>
+          {/* <Button type="submit" variant="success">
+            login
+          </Button> */}
+          <Button type="submit" variant="success">
+            {loginOrSignupState}
+          </Button>
+          <br />
+          <Link
             type="text"
-            placeholder="Enter email or Username"
-            onChange={handleEvent}
-          />
-        </Form.Group>
-        <Form.Group className="mb-3" controlId="formBasicPassword">
-          <Form.Control
-            name="password"
-            value={formData.password}
-            type="password"
-            placeholder="Password"
-            onChange={handleEvent}
-          />
-        </Form.Group>
-        <Button type="submit" variant="success">
-          {loginOrSignupState}
-        </Button>
-        <br />
-        <Link
-          type="text"
-          variant="normal"
-          onClick={() => navigate("/forgotpassword")}
-        >
-          Forgot Password?
-        </Link>
-        <br />
-        <Form.Text className="text-muted" variant="Success" type="text">
-          or
-        </Form.Text>
-        <br />
-        <Link
-          type="text"
-          variant="Success"
-          as="a"
-          onClick={() => setLoginOrSignupState("SignUp")}
-        >
-          Create new account
-        </Link>
-      </Form>
+            variant="normal"
+            onClick={() => navigate("/forgotpassword")}
+          >
+            Forgot Password?
+          </Link>
+          <br />
+          <Form.Text className="text-muted" variant="Success" type="text">
+            or
+          </Form.Text>
+          <br />
+          <Link
+            type="text"
+            variant="Success"
+            as="a"
+            onClick={() => setLoginOrSignupState("SignUp")}
+          >
+            Create new account
+          </Link>
+        </Form>
+      </Card>
     </>
   );
 }
