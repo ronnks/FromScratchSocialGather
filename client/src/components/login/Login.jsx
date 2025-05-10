@@ -59,7 +59,7 @@ function Login() {
         </div>
         <Form noValidate validated={validated} onSubmit={handleSubmit}>
           <br />
-          <Form.Group className="mb-3" controlId="formBasicEmail">
+          <Form.Group className="mb-2" controlId="formBasicEmail">
             <Form.Control
               required
               name="email"
@@ -73,7 +73,7 @@ function Login() {
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Group className="mb-3" controlId="formBasicPassword">
+          <Form.Group className="mb-2" controlId="formBasicPassword">
             <Form.Control
               required
               name="password"
@@ -93,13 +93,7 @@ function Login() {
             {loginOrSignupState}
           </Button>
           <br />
-          <Link
-            type="text"
-            variant="normal"
-            onClick={() => navigate("/forgotpassword")}
-          >
-            Forgot Password?
-          </Link>
+          <Link to="/forgotpassword">Forgot Password?</Link>
           <br />
           <Form.Text className="text-muted" variant="Success" type="text">
             or

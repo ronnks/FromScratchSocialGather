@@ -65,44 +65,48 @@ function SignUp() {
           <h2>Create Account</h2>
           <h6>It's super quick, let's go.</h6>
           <Form noValidate validated={validated} onSubmit={handleSubmit}>
-            <Form.Group md="3" controlId="validationCustom01">
-              <Form.Control required type="text" placeholder="First name" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-              <Form.Control.Feedback type="invalid">
-                What's your name.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <br />
-            <Form.Group md="3" controlId="validationCustom02">
-              <Form.Control required type="text" placeholder="Last name" />
-              <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
-              <Form.Control.Feedback type="invalid">
-                What's your name.
-              </Form.Control.Feedback>
-            </Form.Group>
-            <br />
-            <Form.Group md="3" controlId="validationCustomUsername">
-              <InputGroup hasValidation>
-                <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
-                <Form.Control
-                  type="text"
-                  placeholder="Username or email"
-                  aria-describedby="inputGroupPrepend"
-                  required
-                />
+            <Row className="mb-2">
+              <Form.Group controlId="validationCustom01">
+                <Form.Control required type="text" placeholder="First name" />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
                 <Form.Control.Feedback type="invalid">
-                  Please choose a username.
+                  What's your name.
                 </Form.Control.Feedback>
-              </InputGroup>
-            </Form.Group>
-            <br />
-            <Form.Group md="3" controlId="validationCustom03">
-              <Form.Control type="text" placeholder="New password" required />
-              <Form.Control.Feedback type="invalid">
-                Please provide a valid city.
-              </Form.Control.Feedback>
-            </Form.Group>
-
+              </Form.Group>
+            </Row>
+            <Row className="mb-2">
+              <Form.Group controlId="validationCustom02">
+                <Form.Control required type="text" placeholder="Last name" />
+                <Form.Control.Feedback>Looks good!</Form.Control.Feedback>
+                <Form.Control.Feedback type="invalid">
+                  What's your name.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
+            <Row className="mb-2">
+              <Form.Group controlId="validationCustomUsername">
+                <InputGroup hasValidation>
+                  <InputGroup.Text id="inputGroupPrepend">@</InputGroup.Text>
+                  <Form.Control
+                    type="text"
+                    placeholder="Username or email"
+                    aria-describedby="inputGroupPrepend"
+                    required
+                  />
+                  <Form.Control.Feedback type="invalid">
+                    Please choose a username.
+                  </Form.Control.Feedback>
+                </InputGroup>
+              </Form.Group>
+            </Row>
+            <Row className="mb-2">
+              <Form.Group controlId="validationCustom03">
+                <Form.Control type="text" placeholder="New password" required />
+                <Form.Control.Feedback type="invalid">
+                  Please provide a valid city.
+                </Form.Control.Feedback>
+              </Form.Group>
+            </Row>
             <Button type="submit" variant="success">
               {loginOrSignupState}
             </Button>
