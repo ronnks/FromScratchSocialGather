@@ -1,7 +1,7 @@
 import Card from "react-bootstrap/Card";
 import MakeAPost from "../post/MakeAPost";
 import Posts from "../post/Posts";
-import _Navbar from "../navbar/Navbar";
+import _Navbar from "../feed/navbar/Navbar";
 import { useEffect } from "react";
 import { usePostStore } from "../../store/PostStore";
 import APost from "../post/APost";

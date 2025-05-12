@@ -7,6 +7,7 @@ import { loginOrSignup } from "../../store/LoginOrSignupState";
 import { useAuthStore } from "../../store/AuthStore";
 import SocialGather from "../logo/socialGather";
 import Card from "react-bootstrap/Card";
+import Logo from "../logo/Logo";
 
 const initialFormData = {
   input: "",
@@ -53,6 +54,7 @@ function Login() {
 
   return (
     <>
+      <Logo></Logo>
       <Card className="loginBox">
         <div className="socialgatherBox">
           <h1>socialgather</h1>
