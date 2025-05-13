@@ -3,6 +3,7 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import "./NavbarCSS.css";
+import { home_icon } from "./navicons/NavIcons";
 
 function _Navbar() {
   const navigate = useNavigate();
@@ -12,7 +13,9 @@ function _Navbar() {
       <Navbar className="navbarBox">
         <Nav activeKey="/home">
           <Nav.Item>
-            <Nav.Link href="/home">S</Nav.Link>
+            <Nav.Link href="/home">
+              <img className="nav_icon" src={"profile"}></img>
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
             <Form.Control
@@ -23,30 +26,30 @@ function _Navbar() {
         </Nav>
         <Nav activeKey="/home">
           <Nav.Item>
-            <Nav.Link href="/home">Home</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-1">Friends</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-2">videos</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-3">Groups</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
         </Nav>
         <Nav activeKey="/home">
           <Nav.Item>
-            <Nav.Link href="/home">Menu</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-1">socialize</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-2">notifications</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
           <Nav.Item>
-            <Nav.Link eventKey="link-3">Account</Nav.Link>
+            <img className="nav_icon" src={home_icon}></img>
           </Nav.Item>
         </Nav>
       </Navbar>
