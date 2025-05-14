@@ -1,11 +1,11 @@
 import "./App.css";
 import Welcome from "./components/welcome/Welcome";
-import Login from "./components/login/Login";
-import SignUp from "./components/signup/Signup";
-import Feed from "./components/feed/Feed";
-import ForgotPassword from "./components/login/forgotPassword/ForgotPassword";
-import Profile from "./components/profile/profile";
+import Feed from "./components/views/feed/Feed";
+import ForgotPassword from "./pages/login/forgotPassword/ForgotPassword";
+import Profile from "./components/views/profile/Profile";
 import { Route, Routes } from "react-router-dom";
+import Login from "./pages/login/Login";
+import SignUp from "./pages/signup/Signup";
 
 function App() {
   return (

@@ -4,10 +4,8 @@ import { Link, useNavigate } from "react-router-dom";
 import "./loginCSS.css";
 import "bootstrap/dist/css/bootstrap.min.css";
 import { loginOrSignup } from "../../store/LoginOrSignupState";
-import { useAuthStore } from "../../store/AuthStore";
-import SocialGather from "../logo/socialGather";
 import Card from "react-bootstrap/Card";
-import Logo from "../logo/Logo";
+import Logo from "../../components/views/logo/Logo";
 
 const initialFormData = {
   input: "",

@@ -3,7 +3,13 @@ import Navbar from "react-bootstrap/Navbar";
 import Form from "react-bootstrap/Form";
 import { useNavigate } from "react-router-dom";
 import "./NavbarCSS.css";
-import { home_icon } from "./navicons/NavIcons";
+import { GoHome } from "react-icons/go";
+import { LiaUserFriendsSolid } from "react-icons/lia";
+import { CiVideoOn } from "react-icons/ci";
+import { AiOutlineUsergroupAdd } from "react-icons/ai";
+import { ImMenu } from "react-icons/im";
+import { FaSignalMessenger } from "react-icons/fa6";
+import { IoNotifications } from "react-icons/io5";
 
 function _Navbar() {
   const navigate = useNavigate();
@@ -26,30 +32,46 @@ function _Navbar() {
         </Nav>
         <Nav activeKey="/home">
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <GoHome className="nav_icon" />
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <LiaUserFriendsSolid className="nav_icon" />
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <CiVideoOn className="nav_icon" />
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <AiOutlineUsergroupAdd className="nav_icon" />
+            </Nav.Link>
           </Nav.Item>
         </Nav>
         <Nav activeKey="/home">
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <ImMenu />
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <FaSignalMessenger className="nav_icon" />
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <IoNotifications className="nav_icon" />
+            </Nav.Link>
           </Nav.Item>
           <Nav.Item>
-            <img className="nav_icon" src={home_icon}></img>
+            <Nav.Link href="/home">
+              <img className="nav_icon" src={"profile"}></img>
+            </Nav.Link>
           </Nav.Item>
         </Nav>
       </Navbar>

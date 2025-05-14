@@ -2,9 +2,9 @@ import Button from "react-bootstrap/Button";
 import Card from "react-bootstrap/Card";
 import FloatingLabel from "react-bootstrap/FloatingLabel";
 import Form from "react-bootstrap/Form";
-import { usePostStore } from "../../store/PostStore";
 import { useState } from "react";
-import { useUserStore } from "../../store/UserStore";
+import { useUserStore } from "../../../store/UserStore";
+import { usePostStore } from "../../../store/PostStore";
 
 const initialState = {
   author: "",
