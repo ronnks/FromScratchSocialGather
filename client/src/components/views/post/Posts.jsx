@@ -1,7 +1,7 @@
 import Col from "react-bootstrap/Col";
 import Row from "react-bootstrap/Row";
 import APost from "./APost";
-import { usePostStore } from "../../store/PostStore";
+import { usePostStore } from "../../../store/PostStore";
 import { useEffect } from "react";
 
 function Posts() {

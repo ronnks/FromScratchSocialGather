@@ -3,7 +3,7 @@ import MakeAPost from "../post/MakeAPost";
 import Posts from "../post/Posts";
 import _Navbar from "../feed/navbar/Navbar";
 import { useEffect } from "react";
-import { usePostStore } from "../../store/PostStore";
+import { usePostStore } from "../../../store/PostStore";
 import APost from "../post/APost";
 import Row from "react-bootstrap/esm/Row";
 import Col from "react-bootstrap/esm/Col";
